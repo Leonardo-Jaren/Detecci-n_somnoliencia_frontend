@@ -1,65 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <!--=============== REMIXICONS ===============-->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
-
-   <!--=============== CSS ===============-->
-   <link rel="stylesheet" href="login.component.css">
-   
-   <title>Responsive login and registration form - Bedimcode</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    
+    <!--=============== TAILWIND CSS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <title>Responsive Login and Registration Form</title>
 </head>
-<body>        
-   <!--=============== LOGIN ===============-->
-   <div class="login container grid" id="loginAccessRegister">
-      <!--===== LOGIN ACCESS =====-->
-      <div class="login__access">
-         <h1 class="login__title text-3xl">BIENVENIDO.</h1>
-         
-         <div class="login__area">
-            <form action="" class="login__form">
-               <div class="login__content grid">
-                  <div class="login__box">
-                     <input type="email" id="email" required placeholder=" " class="login__input">
-                     <label for="email" class="login__label">Username</label>
-         
-                     <i class="ri-mail-fill login__icon"></i>
-                  </div>
-      
-                  <div class="login__box">
-                     <input type="password" id="password" required placeholder=" " class="login__input">
-                     <label for="password" class="login__label">Password</label>
-         
-                     <i class="ri-eye-off-fill login__icon login__password" id="loginPassword"></i>
-                  </div>
-               </div>
-      
-               <a href="#" class="login__forgot">Forgot your password?</a>
-      
-               <button type="submit" class="login__button">Next</button>
-            </form>
-   
-            <div class="login__social">
-               <p class="login__social-title">   O  </p>
-   
-               <div class="login__social-links">
-                  <a href="#" class="login__social-link">
-                     <img src="/SomnolienciaFrontend/public/icon-google.svg" alt="G" class="login__social-img">
-                  </a>
-               </div>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <!--=============== LOGIN ===============-->
+    <div class="login container bg-white shadow-lg rounded-lg p-8 md:w-1/3 w-full my-12" id="loginAccessRegister">
+        <!--===== LOGIN ACCESS =====-->
+        <div class="login__access">
+            <div class="mb-10">
+               <h1 class="login__title text-6xl font-extrabold text-center m-0" style="color: #1C1C1C; font-family: 'Smooch Sans', sans-serif; transform: scaleY(1.4);">Bienvenido</h1>
+               <p class="m-0 text-center">Nos alegra verte de nuevo con nosotros.</p>
             </div>
-   
-            <p class="login__switch">
-               No tienes una cuenta? 
-               <button id="loginButtonRegister">Registrate</button>
-            </p>
-         </div>
-      </div>
-   </div> <!-- Cierre de la etiqueta div faltante -->
+            <div class="login__area">
+                <form action="" class="login__form">
+                    <div class="login__content mb-4">
+                           <div class="login__box mb-4 relative">
+                              <input type="email" id="email" required placeholder=" " class="login__input border border-gray-300 rounded-md p-2 pr-10 pl-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                              <label for="email" class="login__label absolute left-3 top-2 text-gray-500 transition-transform duration-200 transform-translate-y-1/2 scale-75">Usuario</label>
+                              <i class="ri-mail-fill login__icon absolute right-3 top-2 text-gray-500"></i>
+                        </div>
+                        
 
-   <!--=============== MAIN JS ===============-->
-   <script src="login.component.ts"></script>
+                        <div class="login__box">
+                            <input type="password" id="password" required placeholder=" " class="login__input border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label for="password" class="login__label">Contraseña</label>
+                            <i class="ri-eye-off-fill login__icon login__password" id="loginPassword"></i>
+                        </div>
+                    </div>
+
+                    <a href="#" class="login__forgot text-blue-500 text-sm mb-4 inline-block">¿Olvidaste tu contraseña?</a>
+
+                    <button type="submit" class="login__button bg-blue-500 text-white font-semibold rounded-md p-2 w-full hover:bg-blue-600 transition duration-200">Next</button>
+                </form>
+
+                <div class="login__social mt-4">
+                    <p class="login__social-title text-center text-gray-500">O</p>
+
+                    <div class="login__social-links flex justify-center mt-2">
+                        <a href="#" class="login__social-link">
+                            <img src="/SomnolienciaFrontend/public/icon-google.svg" alt="G" class="login__social-img w-8 h-8">
+                        </a>
+                    </div>
+                </div>
+
+                <p class="login__switch text-center text-gray-600 mt-4">
+                    No tienes una cuenta? 
+                    <button id="loginButtonRegister" class="text-blue-500 font-semibold">Regístrate</button>
+                </p>
+            </div>
+        </div>
+    </div> <!-- Cierre de la etiqueta div faltante -->
+
+    <!--=============== MAIN JS ===============-->
+    <script src="login.component.ts"></script>
 </body>
 </html>
