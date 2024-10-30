@@ -3,52 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="register.component.css">
-    <title>Document</title>
+    <title>Crear Nueva Cuenta</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <!--===== LOGIN REGISTER =====-->
-    <div class="login__register">
-        <h1 class="login__title">CREAR NUEVA CUENTA</h1>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h1 class="text-2xl font-semibold text-center mb-6">CREAR NUEVA CUENTA</h1>
 
-        <div class="login__area">
-            <form action="" class="login__form">
-                <div class="login__content grid">
-                    <div class="login__group grid">
-                        <div class="login__box">
-                            <input type="text" id="names" required placeholder=" " class="login__input">
-                            <label for="names" class="login__label">Username</label>
-                            <i class="ri-id-card-fill login__icon"></i>
-                        </div>
-
-                        <div class="login__box">
-                            <input type="text" id="surnames" required placeholder=" " class="login__input">
-                            <label for="surnames" class="login__label">Surnames</label>
-                            <i class="ri-id-card-fill login__icon"></i>
-                        </div>
-                    </div>
-
-                    <div class="login__box">
-                        <input type="email" id="emailCreate" required placeholder=" " class="login__input">
-                        <label for="emailCreate" class="login__label">Email</label>
-                        <i class="ri-mail-fill login__icon"></i>
-                    </div>
-
-                    <div class="login__box">
-                        <input type="password" id="passwordCreate" required placeholder=" " class="login__input">
-                        <label for="passwordCreate" class="login__label">Password</label>
-                        <i class="ri-eye-off-fill login__icon login__password" id="loginPasswordCreate"></i>
+        <form action="">
+            <div class="space-y-4">
+                <div>
+                    <label for="names" class="text-gray-600">Username</label>
+                    <div class="relative">
+                        <input type="text" id="names" required placeholder="Username" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="ri-user-line absolute right-3 top-3 text-gray-400"></i>
                     </div>
                 </div>
 
-                <button type="submit" class="login__button">Create account</button>
-            </form>
+                <div>
+                    <label for="surnames" class="text-gray-600">Surnames</label>
+                    <div class="relative">
+                        <input type="text" id="surnames" required placeholder="Surnames" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="ri-user-line absolute right-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
 
-            <p class="login__switch">
-                Already have an account? 
-                <button id="loginButtonAccess">Log In</button>
-            </p>
-        </div>
+                <div>
+                    <label for="emailCreate" class="text-gray-600">Email</label>
+                    <div class="relative">
+                        <input type="email" id="emailCreate" required placeholder="Email" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="ri-mail-line absolute right-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="passwordCreate" class="text-gray-600">Password</label>
+                    <div class="relative">
+                        <input type="password" id="passwordCreate" required placeholder="Password" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="ri-lock-line absolute right-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full mt-6 p-3 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">Create account</button>
+        </form>
+
+        <p class="text-center mt-4 text-gray-600">
+            Already have an account? 
+            <button id="loginButtonAccess" class="text-blue-500 hover:underline">Log In</button>
+        </p>
     </div>
+
+    <!-- Remixicon para los iconos -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 </body>
 </html>
