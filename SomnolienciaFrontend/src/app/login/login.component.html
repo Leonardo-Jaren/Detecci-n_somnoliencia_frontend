@@ -8,53 +8,55 @@
 
    <!--=============== CSS ===============-->
    <link rel="stylesheet" href="login.component.css">
-   
+
    <title>Responsive login and registration form - Bedimcode</title>
 </head>
 <body>
    <!--=============== LOGIN IMAGE ===============-->
-        
+
    <!--=============== LOGIN ===============-->
    <div class="login container grid" id="loginAccessRegister">
       <!--===== LOGIN ACCESS =====-->
       <div class="login__access">
          <h1 class="login__title">BIENVENIDO.</h1>
-         
+
          <div class="login__area">
             <form action="" class="login__form">
                <div class="login__content grid">
                   <div class="login__box">
                      <input type="email" id="email" required placeholder=" " class="login__input">
                      <label for="email" class="login__label">Username</label>
-         
+
                      <i class="ri-mail-fill login__icon"></i>
                   </div>
-      
+
                   <div class="login__box">
                      <input type="password" id="password" required placeholder=" " class="login__input">
                      <label for="password" class="login__label">Password</label>
-         
+
                      <i class="ri-eye-off-fill login__icon login__password" id="loginPassword"></i>
                   </div>
                </div>
-      
+
                <a href="#" class="login__forgot">Forgot your password?</a>
-      
+
                <button type="submit" class="login__button">Next</button>
             </form>
-   
+
             <div class="login__social">
-               <p class="login__social-title">   O  </p>
-   
+               <p class="login__social-title">O</p>
+
                <div class="login__social-links">
-                  <a href="#" class="login__social-link">
-                     <img src="assets/img/icon-google.svg" alt="image" class="login__social-img">
-                  </a>
+                  <!-- Botón para iniciar sesión con Google -->
+                  <button (click)="signInWithGoogle()" class="login__social-link">
+                     <img src="assets/img/icon-google.svg" alt="Google logo" class="login__social-img">
+                     Iniciar sesión con Google
+                  </button>
                </div>
             </div>
-   
+
             <p class="login__switch">
-               No tienes una cuenta? 
+               No tienes una cuenta?
                <button id="loginButtonRegister">Registrate</button>
             </p>
          </div>

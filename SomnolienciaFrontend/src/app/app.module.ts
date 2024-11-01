@@ -3,25 +3,40 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//import { PruebaComponent } from './prueba/prueba.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-//import { AuthInterceptor } from '../service/interceptor';
+
+// Importa los módulos de Google Sign-In
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
     AppComponent,
-//    PruebaComponent,
     LoginComponent,
-RegisterComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule  // Agrega SocialLoginModule aquí
   ],
   providers: [
-//    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false, // Cambia a true si deseas mantener la sesión iniciada
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '1024260304252-n5p5hmq6c29g0gt39dqk0n04ijmuonnh.apps.googleusercontent.com'  // Reemplaza con tu ID de cliente de Google
+            )
+          }
+        ],
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })
