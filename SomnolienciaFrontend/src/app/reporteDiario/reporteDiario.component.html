@@ -1,0 +1,71 @@
+
+<div class="relative bg-gradient-to-b from-white to-blue-100 rounded-t-lg shadow-lg overflow-hidden">
+    <h1 class="text-center text-xl font-bold py-4 relative z-10 mt-2">REPORTE</h1>
+    <div class="absolute top-0 left-0 w-full h-8 bg-white custom-zigzag"></div>
+</div>
+    
+<div class="p-4">
+    <h2 class="font-bold mb-4">Panel de Estado</h2>
+    <div class="flex items-center space-x-4 bg-gradient-to-b from-white to-blue-100 rounded-lg shadow-md p-4 relative overflow-hidden">
+
+        <div class="bg-white p-1 rounded-lg shadow text-center border border-blue-100 w-1/5">
+            <h3 class="font-semibold text-sm">Nivel de Somnolencia</h3>
+            <p class="text-2xl mt-2">{{ somnolencia }}</p>
+        </div>
+
+        <div class="bg-white p-1 rounded-lg shadow text-center border border-blue-100 w-1/5">
+            <h3 class="font-semibold text-sm">Parpadeos</h3>
+            <p class="text-2xl text-blue-500 mt-2">{{ parpadeos }}</p>
+        </div>
+
+        <div class="bg-white p-1 rounded-lg shadow text-center border border-blue-100 w-1/5">
+            <h3 class="font-semibold text-sm">Cabecear</h3>
+            <p class="text-2xl text-blue-500 mt-2">{{cabecear}}</p>
+        </div>
+
+        <div class="bg-white p-1 rounded-lg shadow text-center border border-blue-100 w-1/5">
+            <h3 class="font-semibold text-sm">Bostezo</h3>
+            <p class="text-2xl text-blue-500 mt-2">{{ bostezo }}</p>
+        </div>
+            
+        <div class="w-1/6">
+            <label for="periodo" class="block font-medium text-sm mb-1">Periodo</label>
+            <select [(ngModel)]="selectedPeriod" (change)="updateValues()" id="periodo" class="w-full p-2 border border-blue-300 rounded-md bg-blue-50 text-sm">
+                <option value="diario">Diario</option>
+                <option value="semanal">Semanal</option>
+                <option value="mensual">Mensual</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="flex flex-col items-center space-y-4 bg-gray-50 p-6 rounded-md shadow-lg">
+    <!-- Título principal -->
+    <h2 class="text-center text-lg font-bold text-gray-800">Gráfico de frecuencia diaria</h2>
+
+    <div class="flex justify-center items-center space-x-4 w-full">
+        <!-- Leyenda -->
+        <div class="grid grid-cols-2 gap-5 text-sm font-semibold self-center">
+            <span class="text-gray-800">Bostezo</span>
+            <span class="w-4 h-4 bg-blue-500"></span>
+        
+            <span class="text-gray-800">Cabeceos</span>
+            <span class="w-4 h-4 bg-red-500"></span>
+        
+            <span class="text-gray-800">Frotarse los ojos</span>
+            <span class="w-4 h-4 bg-purple-500"></span>
+        </div>
+
+        <!-- Gráfico más pequeño -->
+        <div class="felx-1  w-[700px] h-48">
+            <canvas id="myChart" class="w-full h-full bg-white border border-gray-200 rounded-md shadow">
+
+                
+            </canvas>
+        </div>
+    </div>
+</div>
+
+    

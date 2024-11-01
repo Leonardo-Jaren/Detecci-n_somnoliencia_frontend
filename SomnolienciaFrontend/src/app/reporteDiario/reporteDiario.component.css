@@ -1,0 +1,14 @@
+.chart-container {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+ /* h2 {
+    text-align: center;
+    font-weight: bold;
+  }*/
+  .custom-zigzag {
+    background: linear-gradient(to right, #e0f7ff 20%, #ffffff 20%, #ffffff 40%, #e0f7ff 40%, #e0f7ff 60%, #ffffff 60%, #ffffff 80%, #e0f7ff 80%);
+    clip-path: polygon(0 100%, 10% 80%, 20% 100%, 30% 80%, 40% 100%, 50% 80%, 60% 100%, 70% 80%, 80% 100%, 90% 80%, 100% 100%);
+}
