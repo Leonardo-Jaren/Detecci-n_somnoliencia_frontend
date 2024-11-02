@@ -10,6 +10,14 @@
    <link rel="stylesheet" href="login.component.css">
 
    <title>Responsive login and registration form - Bedimcode</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Login and Registration Form</title>
+
+    <!-- Remix Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
    <!--=============== LOGIN IMAGE ===============-->
@@ -44,14 +52,12 @@
             </form>
 
             <div class="login__social">
-               <p class="login__social-title">O</p>
+               <p class="login__social-title">   O  </p>
 
                <div class="login__social-links">
-                  <!-- Botón para iniciar sesión con Google -->
-                  <button (click)="signInWithGoogle()" class="login__social-link">
-                     <img src="assets/img/icon-google.svg" alt="Google logo" class="login__social-img">
-                     Iniciar sesión con Google
-                  </button>
+                  <a href="#" class="login__social-link">
+                     <img src="assets/img/icon-google.svg" alt="image" class="login__social-img">
+                  </a>
                </div>
             </div>
 
