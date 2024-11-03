@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-reporteDiario',
@@ -39,59 +40,53 @@ export class reporteDiario {
     }
   }
 
-  //grafico de frecuencia diaria
-  public barChartOptions = {
-    responsive: true,
-    scales: {
-      x: {
-        beginAtZero: true
+// grafico de frecuencia diaria
+chart: any;
+
+ngOnInit(): void {
+    this.crearGrafico();
+  }
+
+crearGrafico() {
+    this.chart = new Chart("GraficoFrecuenciaDiaria", {
+      type: 'bar',
+      data: { //
+        labels: ['0:00', '1:00', '2:00', '3:00', '4:00','6:00','8:00' /*sss*/],
+        datasets: [
+          {
+            label: 'Bostezo',
+            data: [30, 45, 50, 30, 10], 
+            backgroundColor: 'blue',
+          },
+          {
+            label: 'Cabecear',
+            data: [20, 35, 45, 40, 15],
+            backgroundColor: 'red',
+          },
+          {
+            label: 'Parpadeos',
+            data: [15, 30, 35, 30, 20], 
+            backgroundColor: 'purple',
+          }
+        ]
       },
-      y: {
-        beginAtZero: true,
-        ticks: {
-          callback: (value: number) => `${value}s` 
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 60 
+          }
+        },
+        plugins: {
+          legend: {
+            display:  false,
+          },
+          title: {
+            display: true,
+          }
         }
       }
-    },
-    plugins: {
-      legend: {
-        position: 'left'
-      }
-    }
-  };
-  
-  public barChartLabels = ['0:00', '1:00', '2:00', '3:00', '4:00'];
-  public barChartData = [
-    { label: 'bostezos', data: [10, 20, 30, 40, 50], backgroundColor: 'blue' },
-    { label: 'cabecar', data: [15, 25, 35, 45, 55], backgroundColor: 'red' },
-    { label: 'frotarse los ojos', data: [12, 22, 32, 42, 52], backgroundColor: 'purple' }
-  ];
-  public barChartType = 'bar';
-
-
-  //para actualizar las tablas
-  /*public updateChart(period: string): void {
-    if (period === 'diario') {
-      this.barChartLabels = ['0:00', '1:00', '2:00', '3:00', '4:00'];
-      this.barChartData = [
-        { label: 'bostezos', data: [10, 20, 30, 40, 50], backgroundColor: 'blue' },
-        { label: 'cabecar', data: [15, 25, 35, 45, 55], backgroundColor: 'red' },
-        { label: 'frotarse los ojos', data: [12, 22, 32, 42, 52], backgroundColor: 'purple' }
-      ];
-    } else if (period === 'semanal') {
-      this.barChartLabels = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
-      this.barChartData = [
-        { label: 'bostezos', data: [30, 40, 50, 60, 70], backgroundColor: 'blue' },
-        { label: 'cabecar', data: [20, 30, 40, 50, 60], backgroundColor: 'red' },
-        { label: 'frotarse los ojos', data: [25, 35, 45, 55, 65], backgroundColor: 'purple' }
-      ];
-    } else if (period === 'mensual') {
-      this.barChartLabels = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'];
-      this.barChartData = [
-        { label: 'bostezos', data: [100, 200, 300, 400], backgroundColor: 'blue' },
-        { label: 'cabecar', data: [150, 250, 350, 450], backgroundColor: 'red' },
-        { label: 'frotarse los ojos', data: [120, 220, 320, 420], backgroundColor: 'purple' }
-      ];
-    }
-  }*/
+    });
+  }
 }

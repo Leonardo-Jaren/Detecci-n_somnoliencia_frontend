@@ -42,11 +42,10 @@
 
 
 <div class="flex flex-col items-center space-y-4 bg-gray-50 p-6 rounded-md shadow-lg">
-    <!-- Título principal -->
     <h2 class="text-center text-lg font-bold text-gray-800">Gráfico de frecuencia diaria</h2>
 
     <div class="flex justify-center items-center space-x-4 w-full">
-        <!-- Leyenda -->
+
         <div class="grid grid-cols-2 gap-5 text-sm font-semibold self-center">
             <span class="text-gray-800">Bostezo</span>
             <span class="w-4 h-4 bg-blue-500"></span>
@@ -54,16 +53,12 @@
             <span class="text-gray-800">Cabeceos</span>
             <span class="w-4 h-4 bg-red-500"></span>
         
-            <span class="text-gray-800">Frotarse los ojos</span>
+            <span class="text-gray-800">Parpadeos</span>
             <span class="w-4 h-4 bg-purple-500"></span>
         </div>
 
-        <!-- Gráfico más pequeño -->
-        <div class="felx-1  w-[700px] h-48">
-            <canvas id="myChart" class="w-full h-full bg-white border border-gray-200 rounded-md shadow">
-
-                
-            </canvas>
+        <div class="mt-4" >
+            <canvas id="GraficoFrecuenciaDiaria" class="w-[1000px] h-[400px]"></canvas>
         </div>
     </div>
 </div>
