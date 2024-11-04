@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@abacritt/angularx-social-login": "^2.3.0",
-    "@angular/platform-browser": "^18.2.9"
-  }
-}
