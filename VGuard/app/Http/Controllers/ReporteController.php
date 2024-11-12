@@ -10,7 +10,7 @@ class ReporteController extends Controller
     public function showReporte()
     {
         // Ruta absoluta a tu archivo CSV
-        $csvFilePath = '/ruta/a/tu_archivo.csv';
+        $csvFilePath = base_path('drowsiness_processor/reports/august/drowsiness_report.csv');
 
         if (file_exists($csvFilePath)) {
             $csv = Reader::createFromPath($csvFilePath, 'r');
@@ -19,14 +19,14 @@ class ReporteController extends Controller
             $data = [];
             foreach ($csv->getRecords() as $record) {
                 $data[] = [
-                    'label' => $record['nombre_columna'],  // Cambia según el nombre de tu columna en CSV
-                    'value' => $record['valor_columna'],   // Cambia según el nombre de tu columna en CSV
+                    'label' => $record['timestamp'], // Cambia según tu CSV
+                    'value' => $record['micro_sleep_count'], // Cambia según tu CSV
                 ];
             }
         } else {
             $data = [];
         }
 
-        return view('resumen2')->with('data', json_encode($data));
+        return view('resumen')->with('data', json_encode($data));
     }
 }

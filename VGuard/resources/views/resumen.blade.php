@@ -1,31 +1,60 @@
-<div class="chart-container">
-    <canvas id="myChart"></canvas>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte en Tiempo Real</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="chart-container" style="width: 80%; margin: auto;">
+        <canvas id="myChart"></canvas>
+    </div>
 
-<script>
-    // Datos en formato JSON pasados desde el controlador
-    const data = @json($data);
-
-    // Configuración de Chart.js para mostrar el gráfico de barras
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: data.map(item => item.label),
-            datasets: [{
-                label: 'Valores',
-                data: data.map(item => item.value),
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        let myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [], // Etiquetas vacías, se llenarán dinámicamente
+                datasets: [{
+                    label: 'Micro Sleep Count',
+                    data: [], // Datos vacíos, se llenarán dinámicamente
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
+        });
+
+        // Función para actualizar el gráfico
+        async function updateChart() {
+            try {
+                const response = await fetch('/api/reporte/data'); // Llama al endpoint API
+                const data = await response.json();
+
+                // Actualiza las etiquetas y los datos
+                myChart.data.labels = data.map(item => item.label);
+                myChart.data.datasets[0].data = data.map(item => item.value);
+
+                myChart.update(); // Actualiza el gráfico con los nuevos datos
+            } catch (error) {
+                console.error("Error al actualizar el gráfico:", error);
+            }
         }
-    });
-</script>
+
+        // Llama a updateChart cada 5 segundos para actualizar el gráfico en tiempo real
+        setInterval(updateChart, 5000);
+
+        // Llama a updateChart una vez al cargar la página
+        updateChart();
+    </script>
+</body>
+</html>

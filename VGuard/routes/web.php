@@ -36,8 +36,8 @@ Route::get('/register', function(){
 });
  */
 
-Route::get('/resumen',function(){
+/* Route::get('/resumen',function(){
     return view('resumen');
-})->name('resumen');
+})->name('resumen'); */
 
 Route::get('/reporte', [ReporteController::class, 'showReporte']);
