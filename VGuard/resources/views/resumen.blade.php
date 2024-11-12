@@ -1,4 +1,3 @@
-<x-app-layout>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="flex flex-col items-center space-y-4 bg-gray-50 p-6 rounded-md shadow-lg">
@@ -57,4 +56,3 @@
         });
     </script>
 </div>
-</x-app-layout>
