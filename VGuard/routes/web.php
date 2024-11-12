@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleController;
-
+use App\Http\Controllers\ReporteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,3 +35,9 @@ Route::get('/register', function(){
     return view('resumen');
 });
  */
+
+Route::get('/resumen',function(){
+    return view('resumen');
+})->name('resumen');
+
+Route::get('/reporte', [ReporteController::class, 'showReporte']);
