@@ -26,3 +26,11 @@ route::get('auth/google/callback',[GoogleController::class,'googlecallback']);
 Route::get('/login', function () {
     return view('login_view'); // Cambia a 'auth.login_view' sin '.blade.php'
 })->name('login');
+
+Route::get('/register', function () {
+    return view('register_view'); // Cambia a 'auth.register_view' sin '.blade.php'
+})->name('register');
+
+Route::get('/resumen', function () {
+    return view('resumen'); // Cambia a 'auth.resumen_view' sin '.blade.php'
+})->name('resumen');
