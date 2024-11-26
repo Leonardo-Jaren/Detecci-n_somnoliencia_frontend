@@ -31,3 +31,7 @@ Route::get('/login', function () {
 //ruta para el reporte
 Route::get('/reporte', [reporteController::class, 'mostrarReporte'])->name('reporte.mostrar');
 Route::post('/reporte/update', [reporteController::class, 'mostrarReporte'])->name('reporte.update');
+
+Route::get('/resumen', function () {
+    return view('resumen');  // Nombre de la vista sin extensión .blade.php
+});
