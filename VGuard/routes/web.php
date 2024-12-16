@@ -41,3 +41,19 @@ Route::get('/register', function(){
 })->name('resumen'); */
 
 Route::get('/reporte', [ReporteController::class, 'showReporte']);
+
+Route::get('/register', function () {
+    return view('register_view'); // Cambia a 'auth.register_view' sin '.blade.php'
+})->name('register');
+
+Route::get('/resumen', function () {
+    return view('resumen'); // Cambia a 'auth.resumen_view' sin '.blade.php'
+})->name('resumen');
+
+Route::get('/register', function () {
+    return view('register_view'); // Cambia a 'auth.register_view' sin '.blade.php'
+})->name('register');
+
+Route::get('/resumen', function () {
+    return view('resumen'); // Cambia a 'auth.resumen_view' sin '.blade.php'
+})->name('resumen');
