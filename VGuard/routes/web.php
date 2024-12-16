@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Rutas protegidas con middleware de autenticación
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -18,42 +19,24 @@ Route::middleware([
     })->name('dashboard');
 });
 
-//Rutas para la autenticacion con Google
-route::get('auth/google',[GoogleController::class,'googlepage']);
-route::get('auth/google/callback',[GoogleController::class,'googlecallback']);
+// Rutas para la autenticación con Google
+Route::get('auth/google', [GoogleController::class, 'googlepage']);
+Route::get('auth/google/callback', [GoogleController::class, 'googlecallback']);
 
-// Ruta para login_view.blade.php
+// Ruta para la vista de login
 Route::get('/login', function () {
-    return view('login_view'); // Cambia a 'auth.login_view' sin '.blade.php'
+    return view('login_view'); // Nombre de la vista sin '.blade.php'
 })->name('login');
 
-Route::get('/register', function(){
-    return view('register_view');
-})->name('/register');
-
-/* Route::get('/', function () {
-    return view('resumen');
-});
- */
-
-/* Route::get('/resumen',function(){
-    return view('resumen');
-})->name('resumen'); */
-
-Route::get('/reporte', [ReporteController::class, 'showReporte']);
-
+// Ruta para la vista de registro (dejar solo una)
 Route::get('/register', function () {
-    return view('register_view'); // Cambia a 'auth.register_view' sin '.blade.php'
+    return view('register_view'); // Nombre de la vista sin '.blade.php'
 })->name('register');
 
-Route::get('/resumen', function () {
-    return view('resumen'); // Cambia a 'auth.resumen_view' sin '.blade.php'
-})->name('resumen');
+// Ruta para el reporte de somnolencia
+Route::get('/reporte', [ReporteController::class, 'showReporte'])->name('reporte');
 
-Route::get('/register', function () {
-    return view('register_view'); // Cambia a 'auth.register_view' sin '.blade.php'
-})->name('register');
-
+// Ruta para la vista resumen
 Route::get('/resumen', function () {
-    return view('resumen'); // Cambia a 'auth.resumen_view' sin '.blade.php'
+    return view('resumen'); // Nombre de la vista sin '.blade.php'
 })->name('resumen');

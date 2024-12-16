@@ -25,44 +25,22 @@
         canvas {
             max-width: 100%;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .summary-row {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .summary-item {
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 18%;
-        }
     </style>
 </head>
 <body>
     <center><h1>Reportes de Somnolencia</h1></center>
-
     <h3>Panel de estado</h3>
 
 <?php
-
 $url = resource_path("archivos/drowsiness_report.csv");
+
+$datos_reportes = [
+    'eye_rub' => ['counts' => [], 'timestamps' => []],
+    'flicker' => ['counts' => [], 'timestamps' => []],
+    'micro_sleep' => ['counts' => [], 'timestamps' => []],
+    'pitch' => ['counts' => [], 'timestamps' => []],
+    'yawn' => ['counts' => [], 'timestamps' => []]
+];
 
 if (($archivo = fopen($url, "r")) !== false) {
     $encabezados = fgetcsv($archivo);
@@ -83,14 +61,6 @@ if (($archivo = fopen($url, "r")) !== false) {
 
     $columnas_existen = !in_array(false, $indices_columnas, true);
     if ($columnas_existen) {
-        $datos_reportes = [
-            'eye_rub' => ['counts' => [], 'timestamps' => []],
-            'flicker' => ['counts' => [], 'timestamps' => []],
-            'micro_sleep' => ['counts' => [], 'timestamps' => []],
-            'pitch' => ['counts' => [], 'timestamps' => []],
-            'yawn' => ['counts' => [], 'timestamps' => []]
-        ];
-
         while (($datos = fgetcsv($archivo)) !== false) {
             foreach (['eye_rub', 'flicker', 'micro_sleep', 'pitch', 'yawn'] as $report_type) {
                 if (strtolower($datos[$indices_columnas["{$report_type}_report"]]) == 'true') {
@@ -101,40 +71,6 @@ if (($archivo = fopen($url, "r")) !== false) {
                 }
             }
         }
-
-        $promedios = [];
-        foreach ($datos_reportes as $report_type => $report_data) {
-            $promedios[$report_type] = array_sum($report_data['counts']) / count($report_data['counts']);
-        }
-
-        echo "<div class='summary-row'>";
-        foreach ($promedios as $report_type => $promedio) {
-            $tipo = [
-                'eye_rub' => 'Frotamientos',
-                'flicker' => 'Parpadeos',
-                'micro_sleep' => 'Microsueños',
-                'pitch' => 'Inclinaciones',
-                'yawn' => 'Bostezos'
-            ][$report_type];
-            echo "<div class='summary-item'><h3>Promedio de $tipo: $promedio</h3></div>";
-        }
-        echo "</div>";
-
-        // Comentamos las tablas generadas
-        /*
-        foreach ($datos_reportes as $report_type => $report_data) {
-            echo "<h3>Timestamps y " . ucfirst(str_replace('_', ' ', $report_type)) . " correspondientes:</h3>";
-            echo "<table style='border: 1px solid;border-collapse: collapse;'>";
-            echo "<tr><th>Timestamp</th><th>" . ucfirst(str_replace('_', ' ', $report_type)) . "</th></tr>";
-            for ($i = 0; $i < count($report_data['timestamps']); $i++) {
-                echo "<tr><td style='border: 1px solid black;max-width: 200px;min-width: 40px;'>{$report_data['timestamps'][$i]}</td>";
-                echo "<td style='border: 1px solid black;max-width: 200px;min-width: 40px;'>{$report_data['counts'][$i]}</td></tr>";
-            }
-            echo "</table>";
-        }
-        */
-    } else {
-        echo "No se encontraron una o más columnas necesarias en el archivo CSV.";
     }
 
     fclose($archivo);
@@ -159,52 +95,69 @@ if (($archivo = fopen($url, "r")) !== false) {
     <canvas id="yawnChart"></canvas>
 </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const ctx = document.getElementById('GraficoFrecuenciaDiaria').getContext('2d');
+<script>
+    // Datos desde PHP a JavaScript
+    const dataReports = {
+        eyeRub: {
+            counts: <?php echo json_encode($datos_reportes['eye_rub']['counts']); ?>,
+            timestamps: <?php echo json_encode($datos_reportes['eye_rub']['timestamps']); ?>
+        },
+        flicker: {
+            counts: <?php echo json_encode($datos_reportes['flicker']['counts']); ?>,
+            timestamps: <?php echo json_encode($datos_reportes['flicker']['timestamps']); ?>
+        },
+        microSleep: {
+            counts: <?php echo json_encode($datos_reportes['micro_sleep']['counts']); ?>,
+            timestamps: <?php echo json_encode($datos_reportes['micro_sleep']['timestamps']); ?>
+        },
+        pitch: {
+            counts: <?php echo json_encode($datos_reportes['pitch']['counts']); ?>,
+            timestamps: <?php echo json_encode($datos_reportes['pitch']['timestamps']); ?>
+        },
+        yawn: {
+            counts: <?php echo json_encode($datos_reportes['yawn']['counts']); ?>,
+            timestamps: <?php echo json_encode($datos_reportes['yawn']['timestamps']); ?>
+        }
+    };
 
-            const chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['0:00', '1:00', '2:00', '3:00', '4:00','5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00',
-                           '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
-                    datasets: [
-                        {
-                            label: 'Bostezo',
-                            data: [30, 45, 50, 30, 10, 20, 25, 20, 35, 25, 40, 30, 15, 25, 30, 45, 50, 40, 35, 45, 30, 20, 15, 10],
-                            backgroundColor: 'blue',
-                        },
-                        {
-                            label: 'Cabecear',
-                            data: [20, 35, 45, 40, 15, 10, 20, 10, 15, 20, 25, 30, 35, 40, 45, 30, 25, 20, 35, 25, 30, 15, 20, 10],
-                            backgroundColor: 'red',
-                        },
-                        {
-                            label: 'Parpadeos',
-                            data: [15, 30, 35, 30, 20, 25, 15, 30, 40, 20, 25, 20, 15, 20, 25, 30, 40, 35, 25, 20, 15, 30, 25, 20],
-                            backgroundColor: 'purple',
-                        }
-                    ]
+    // Función para crear cada gráfico
+    function crearGrafico(id, label, data, timestamps, color) {
+        new Chart(document.getElementById(id).getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: timestamps,
+                datasets: [{
+                    label: label,
+                    data: data,
+                    backgroundColor: color
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 60
-                        }
+                plugins: {
+                    legend: {
+                        display: true
                     },
-                    plugins: {
-                        legend: {
-                            display: true,
-                        },
-                        title: {
-                            display: true,
-                            text: 'Frecuencia Diaria de Comportamientos'
-                        }
+                    title: {
+                        display: true,
+                        text: 'Frecuencia de ' + label
                     }
                 }
-            });
+            }
         });
-    </script>
-</div>
+    }
+
+    // Crear gráficos con los datos del CSV
+    crearGrafico('eyeRubChart', 'Frotamientos', dataReports.eyeRub.counts, dataReports.eyeRub.timestamps, 'rgba(0, 123, 255, 0.5)');
+    crearGrafico('flickerChart', 'Parpadeos', dataReports.flicker.counts, dataReports.flicker.timestamps, 'rgba(255, 99, 132, 0.5)');
+    crearGrafico('microSleepChart', 'Microsueños', dataReports.microSleep.counts, dataReports.microSleep.timestamps, 'rgba(54, 162, 235, 0.5)');
+    crearGrafico('pitchChart', 'Inclinaciones', dataReports.pitch.counts, dataReports.pitch.timestamps, 'rgba(75, 192, 192, 0.5)');
+    crearGrafico('yawnChart', 'Bostezos', dataReports.yawn.counts, dataReports.yawn.timestamps, 'rgba(153, 102, 255, 0.5)');
+</script>
+</body>
+</html>
